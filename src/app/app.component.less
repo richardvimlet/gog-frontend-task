@@ -1,0 +1,81 @@
+@import "../assets/less/variables.less";
+
+app-root {
+  display: block;
+  width: 100%;
+  max-width: 1060px;
+  margin: auto;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* MENU */
+.menu {
+  background-color: #dedede;
+  background: linear-gradient(0deg, rgba(222, 222, 222, 1) 50%, #efefef 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  padding: 0 2%;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  -webkit-box-shadow: 0px 3px 7px 0px #9c9c9c;
+  -moz-box-shadow: 0px 3px 7px 0px #9c9c9c;
+  box-shadow: 0px 3px 7px 0px #9c9c9c;
+  box-sizing: border-box;
+}
+
+.menu-container {
+  height: 100%;
+  width: 100%;
+  max-width: 1060px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* CONTENT */
+.content {
+  width: 100%;
+  max-width: 1060px;
+  margin: auto;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.landing {
+  position: relative;
+  top: 56px;
+  height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+}
+
+.landing-content {
+  width: 100%;
+}
+
+.game-header {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.game-spot {
+  margin: 20px 0;
+  -webkit-box-shadow: 0px 0px 5px 0px @boxShadowColor_1;
+  -moz-box-shadow: 0px 0px 5px 0px @boxShadowColor_1;
+  box-shadow: 0px 0px 5px 0px @boxShadowColor_1;
+  cursor: pointer;
+}
+
+.game-spot img {
+  width: 100%;
+  transform: scale3d(1, 1, 1);
+  transition: all 0.2s ease-out;
+}
+
+.game-spot:hover img {
+  transform: scale3d(1.01, 1.01, 1.01);
+}

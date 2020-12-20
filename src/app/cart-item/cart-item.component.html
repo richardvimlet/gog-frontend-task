@@ -1,0 +1,8 @@
+<picture class="cart-item-cover">
+    <img src="{{game.cover}}" alt>
+</picture>
+<div class="cart-item-details">
+    <span class="cart-item-title">{{game.title}}</span>
+    <span class="cart-item-remove" (click)="removeFromCart()">Remove</span>
+</div>
+<div class="cart-item-price">$ {{game.price}}</div>

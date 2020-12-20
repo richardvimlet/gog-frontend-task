@@ -1,0 +1,45 @@
+<!-- BUTTON -->
+<div class="cart-button" (click)="openCart()" (mouseenter)="handleCartEnter('button')" (mouseleave)="handleCartLeave('button')">
+    <img class="cart-icon" src="assets/img/cart_icon.png" alt="">
+    <span class="cart-count">{{games.length}}</span>
+</div>
+
+<!-- DROPDOWN -->
+<div class="cart-dropdown" (mouseenter)="handleCartEnter('dropdown')" (mouseleave)="handleCartLeave('dropdown')">
+
+    <div *ngIf="games.length > 0; else elseBlock">
+
+        <!-- HEADER -->
+        <div class="cart-dropdown-header">
+            <div class="cart-details">
+                <!-- ITEMS COUNT WITH PLURAL CASES -->
+                <span [ngPlural]="games.length" class="cart-items">
+                    <ng-template ngPluralCase="=1">{{games.length}} ITEM IN CART</ng-template>
+                    <ng-template ngPluralCase="other">{{games.length}} ITEMS IN CART</ng-template>
+                </span>
+
+                <span class="cart-total">$ {{totalPrice}}</span>
+            </div>
+            <!-- CLEAR CART BUTTON -->
+            <div class="cart-clear-button ripple" (click)="clearCart()">
+                CLEAR CART
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="cart-dropdown-content">
+            <cart-item *ngFor="let game of games" [game]="game"></cart-item>
+        </div>
+    </div>
+
+    <!-- IF THE CART IS EMPTY DISPLAYS THE PLACEHOLDER -->
+    <ng-template #elseBlock>
+        <div class="cart-dropdown-placeholder">
+            <div class="cart-dropdown-placeholder-message">
+                <span>YOUR CART IS EMPTY</span>
+                <span>Explore great games and offers</span>
+            </div>
+        </div>
+    </ng-template>
+
+</div>

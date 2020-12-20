@@ -1,0 +1,102 @@
+@import "../../assets/less/variables.less";
+
+small-spot {
+  & {
+    display: block;
+    width: calc(20% - 20px);
+  }
+
+  .small-spot-card {
+    display: flex;
+    flex-direction: column;
+    background-color: @backgroundColor_3;
+    height: 100%;
+    cursor: pointer;
+
+    -webkit-box-shadow: 0px 0px 5px 0px @boxShadowColor_1;
+    -moz-box-shadow: 0px 0px 5px 0px @boxShadowColor_1;
+    box-shadow: 0px 0px 5px 0px @boxShadowColor_1;
+    transition: box-shadow 0.2s ease-out;
+  }
+  
+  .small-spot-card:hover {
+    -webkit-box-shadow: 0px 0px 15px 0px @boxShadowColor_1;
+    -moz-box-shadow: 0px 0px 15px 0px @boxShadowColor_1;
+    box-shadow: 0px 0px 15px 0px @boxShadowColor_1;
+  }
+  
+  .small-spot-card img {
+    width: 100%;
+    transform: scale3d(1, 1, 1);
+    transition: all 0.2s ease-out;
+  }
+  
+  .small-spot-card:hover img {
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  .small-spot.faded .small-spot-title,
+  .small-spot.faded .small-spot-details {
+    opacity: 0.5;
+  }
+
+  .small-spot-title {
+    padding: 7px;
+    box-sizing: border-box;
+    height: 34px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-transform: uppercase;
+    line-height: 1.1;
+    padding-bottom: 0;
+  }
+
+  .small-spot-details {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 7px;
+  }
+
+  .tag {
+    font-size: 12px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    box-sizing: border-box;
+    margin-left: 7px;
+    -webkit-box-shadow: 0px 1px 3px 0px @boxShadowColor_2;
+    -moz-box-shadow: 0px 1px 3px 0px @boxShadowColor_2;
+    box-shadow: 0px 1px 2px 0px @boxShadowColor_2;
+  }
+  
+  .discount-tag {
+    background-color: @discountTagColor;
+    width: 44px;
+    color: @fontColorLight_1;
+  }
+  
+  .price-tag,
+  .status-tag {
+    color: @fontColorLight_3;
+    border: 1px solid @borderColor_2;
+  }
+  
+  .price-tag {
+    width: 55px;
+    background-color: transparent;
+    transition: .2s all ease-out;
+  }
+
+  .price-tag:hover {
+    width: 55px;
+    background-color: @backgroundColor_1;
+  }
+  
+  .status-tag {
+    width: 70px;
+  }
+  
+}
