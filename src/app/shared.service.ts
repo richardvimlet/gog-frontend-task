@@ -7,18 +7,18 @@ import { Game } from './game';
 })
 
 export class SharedService {
-  private subject = new Subject<any>();
+  private cartSubject = new Subject<any>();
 
   addToCart(game: Game) {
-    this.subject.next({ action: "add", game: game });
+    this.cartSubject.next({ action: "add", game: game });
   }
 
   removeFromCart(game: Game) {
-    this.subject.next({ action: "remove", game: game });
+    this.cartSubject.next({ action: "remove", game: game });
   }
 
-  getCart(): Observable<any> {
-    return this.subject.asObservable();
+  getCartSubject(): Observable<any> {
+    return this.cartSubject.asObservable();
   }
 
 }

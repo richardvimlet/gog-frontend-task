@@ -1,7 +1,8 @@
-import { Component, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { Game } from '../game';
 import { SharedService } from './../shared.service';
 import { Subscription } from 'rxjs';
+import games from '../../assets/games.json';
 
 @Component({
   selector: 'cart',
@@ -10,25 +11,30 @@ import { Subscription } from 'rxjs';
   encapsulation: ViewEncapsulation.None
 })
 
-export class CartComponent implements AfterViewInit {
+export class CartComponent implements OnInit {
   cartEventSubscription: Subscription;
   cartIcon: HTMLBaseElement;
-  games: Game[];
+  gamesInCart: Game[];
   totalPrice: number;
   isOnButton: boolean;
   isOnDropdown: boolean;
   closeDropdownTimeout;
 
   constructor(private sharedService: SharedService, private elementRef: ElementRef) {
-    this.games = [];
+    this.gamesInCart = [];
     this.totalPrice = 0;
     // Listens to the new items added or removed
-    this.cartEventSubscription = this.sharedService.getCart().subscribe((data) => {
+    this.cartEventSubscription = this.sharedService.getCartSubject().subscribe((data) => {
       this.handleCartChanges(data);
     })
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
+    this.prepareCartIconTransition();
+    this.handleSessionStorageCart();
+  }
+
+  prepareCartIconTransition(): void {
     this.cartIcon = this.elementRef.nativeElement.querySelector('.cart-icon');
     // Listener to scale back the cart after increased it size on game added
     this.cartIcon.addEventListener("transitionend", function (event) {
@@ -39,12 +45,24 @@ export class CartComponent implements AfterViewInit {
     });
   }
 
+  handleSessionStorageCart(): void {
+    // If we have something saved in the session
+    if (sessionStorage.getItem('cart')) {
+      let cartGamesIds = JSON.parse(sessionStorage.getItem('cart'));
+      // We call the sharedService instead of doing the changes directly here in case we have to do some things in other subscribed components
+      for (let i = 0; i < cartGamesIds.length; i++) {
+        this.sharedService.addToCart(games[cartGamesIds[i]]);
+      }
+    }
+  }
+
   handleCartChanges(data): void {
+
     if (data.action == "add") {
       // Changes the inCart property to the game so that its updated also in the small spot template
       data.game.inCart = true;
 
-      this.games.push(data.game);
+      this.gamesInCart.push(data.game);
       this.totalPrice = parseFloat((this.totalPrice + data.game.price).toFixed(2));
 
       // Scales and makes the cart icon bigger and then it will return back to normal
@@ -54,9 +72,22 @@ export class CartComponent implements AfterViewInit {
       data.game.inCart = false;
 
       // Removes the game from our list
-      this.games.splice(this.games.indexOf(data.game), 1);
+      this.gamesInCart.splice(this.gamesInCart.indexOf(data.game), 1);
       this.totalPrice = parseFloat((this.totalPrice - data.game.price).toFixed(2));
     }
+
+    sessionStorage.setItem("cart", JSON.stringify(this.getGamesIds()));
+
+  }
+
+  getGamesIds(): string[] {
+    let cartGamesIds: string[] = [];
+
+    for (let i = 0; i < this.gamesInCart.length; i++) {
+      cartGamesIds.push(this.gamesInCart[i].id);
+    }
+
+    return cartGamesIds;
   }
 
   openCart(): void {
@@ -89,13 +120,13 @@ export class CartComponent implements AfterViewInit {
         this.closeCart();
       }
     }, 400);
-    
+
   }
 
   clearCart(): void {
     // Loops our games list and removes them
-    for (let i = this.games.length; i > 0; i--) {
-      this.sharedService.removeFromCart(this.games[0]);
+    for (let i = this.gamesInCart.length; i > 0; i--) {
+      this.sharedService.removeFromCart(this.gamesInCart[0]);
     }
   }
 

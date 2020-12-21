@@ -1,21 +1,21 @@
 <!-- BUTTON -->
 <div class="cart-button" (click)="openCart()" (mouseenter)="handleCartEnter('button')" (mouseleave)="handleCartLeave('button')">
     <img class="cart-icon" src="assets/img/cart_icon.png" alt="">
-    <span class="cart-count">{{games.length}}</span>
+    <span class="cart-count">{{gamesInCart.length}}</span>
 </div>
 
 <!-- DROPDOWN -->
 <div class="cart-dropdown" (mouseenter)="handleCartEnter('dropdown')" (mouseleave)="handleCartLeave('dropdown')">
 
-    <div *ngIf="games.length > 0; else elseBlock">
+    <div *ngIf="gamesInCart.length > 0; else elseBlock">
 
         <!-- HEADER -->
         <div class="cart-dropdown-header">
             <div class="cart-details">
                 <!-- ITEMS COUNT WITH PLURAL CASES -->
-                <span [ngPlural]="games.length" class="cart-items">
-                    <ng-template ngPluralCase="=1">{{games.length}} ITEM IN CART</ng-template>
-                    <ng-template ngPluralCase="other">{{games.length}} ITEMS IN CART</ng-template>
+                <span [ngPlural]="gamesInCart.length" class="cart-items">
+                    <ng-template ngPluralCase="=1">{{gamesInCart.length}} ITEM IN CART</ng-template>
+                    <ng-template ngPluralCase="other">{{gamesInCart.length}} ITEMS IN CART</ng-template>
                 </span>
 
                 <span class="cart-total">$ {{totalPrice}}</span>
@@ -28,7 +28,7 @@
 
         <!-- CONTENT -->
         <div class="cart-dropdown-content">
-            <cart-item *ngFor="let game of games" [game]="game"></cart-item>
+            <cart-item *ngFor="let game of gamesInCart" [game]="game"></cart-item>
         </div>
     </div>
 

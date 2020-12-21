@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from '../game';
+import { SharedService } from './../shared.service';
+import games from '../../assets/games.json';
 
 @Component({
   selector: 'small-spots-list',
@@ -7,43 +9,12 @@ import { Game } from '../game';
   styleUrls: ['./small-spots-list.component.less']
 })
 export class SmallSpotsListComponent implements OnInit {
-  games: Game[];
+  gamesList: Game[];
 
-  constructor() {}
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
-    
-    // Manually added games
-    this.games = [
-      {
-        "title": "ODDWORLD: STRANGER'S WRATH",
-        "cover": "assets/img/oddworld_cover.jpg",
-        "price": 9.99,
-        "discount": 50
-      },
-      {
-        "title": "CHAOS ON DEPONIA",
-        "cover": "assets/img/deponia_2_cover.jpg",
-        "owned": true,
-        "price": 9.99
-      },
-      {
-        "title": "THE SETTLERS 2: GOLD EDITION",
-        "cover": "assets/img/settlers_2_cover.jpg",
-        "price": 5.99
-      },
-      {
-        "title": "NEVERWINTER NIGHTS",
-        "cover": "assets/img/neverwinter_nights_cover.jpg",
-        "price": 4.99,
-        "discount": 50
-      },
-      {
-        "title": "ASSASIN'S CREED: DIRECTOR'S CUT",
-        "cover": "assets/img/assasins_creed_cover.jpg",
-        "price": 9.99
-      }
-    ];
+    this.gamesList = Object.values(games);
   }
 
 }
