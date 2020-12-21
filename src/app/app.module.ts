@@ -6,6 +6,7 @@ import { SmallSpotsListComponent } from './small-spots-list/small-spots-list.com
 import { SmallSpotComponent } from './small-spot/small-spot.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
+import { LetterComponent } from './letter/letter.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     SmallSpotsListComponent,
     SmallSpotComponent,
     CartComponent,
-    CartItemComponent
+    CartItemComponent,
+    LetterComponent
   ],
   imports: [
     BrowserModule

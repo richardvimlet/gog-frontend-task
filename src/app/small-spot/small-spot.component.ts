@@ -15,6 +15,7 @@ export class SmallSpotComponent implements OnInit {
   ngOnInit(): void { }
 
   addToCart(): void {
+    // If its not already in the cart
     if (!this.game.inCart) {
       this.sharedService.addToCart(this.game);
     }

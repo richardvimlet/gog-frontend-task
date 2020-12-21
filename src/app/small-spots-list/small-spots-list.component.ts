@@ -13,6 +13,7 @@ export class SmallSpotsListComponent implements OnInit {
 
   ngOnInit() {
     
+    // Manually added games
     this.games = [
       {
         "title": "ODDWORLD: STRANGER'S WRATH",

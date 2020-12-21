@@ -1,12 +1,20 @@
 <div class="small-spot-card">
+    
     <picture>
         <img src="{{game.cover}}" alt>
     </picture>
+    
     <span class="small-spot-title">{{game.title}}</span>
+    
     <div class="small-spot-details">
+        <!-- IF THERE IS A DISCOUNT AND THE GAME IS NOT ALREADY OWNED -->
         <div *ngIf="game.discount && !game.owned" class="tag discount-tag">-{{game.discount}}%</div>
+        <!-- IF ITS OWNED -->
         <div *ngIf="game.owned" class="tag status-tag">OWNED</div>
+        <!-- IF ITS IN CART -->
         <div *ngIf="game.inCart" class="tag status-tag">IN CART</div>
+        <!-- IF ITS NOT OWNED NOR IN CART -->
         <div *ngIf="!game.owned && !game.inCart"  class="tag price-tag" (click)="addToCart()">$ {{game.price}}</div>
     </div>
+
 </div>
